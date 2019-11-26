@@ -5,6 +5,7 @@ function createPhotoCard(photoURL, caption) {
     caption: caption
   });
   console.log("== photoCardHTML:", photoCardHTML);
+  return photoCardHTML;
 
   // var photoCardSection = document.createElement('section');
   // photoCardSection.classList.add('photo-card');
@@ -37,8 +38,9 @@ function handleModalAcceptClick() {
     alert("You must fill in all of the fields!");
   } else {
 
-    var newPhotoCard = createPhotoCard(photoURL, caption);
+    var newPhotoCardHTML = createPhotoCard(photoURL, caption);
     var photoCardContainer = document.querySelector('.photo-card-container');
+    photoCardContainer.insertAdjacentHTML('beforeend', newPhotoCardHTML);
     // photoCardContainer.appendChild(newPhotoCard);
     hideModal();
 
