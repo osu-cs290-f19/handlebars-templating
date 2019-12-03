@@ -5,7 +5,10 @@ var exphbs = require('express-handlebars');
 var app = express();
 var port = 8000;
 
-app.engine('handlebars', exphbs({ defaultLayout: null }));
+var peopleData = require('./peopleData');
+console.log("== peopleData:", peopleData);
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
@@ -28,7 +31,11 @@ app.get('/people/:person', function (req, res, next) {
     // res.status(200).sendFile(
     //   __dirname + '/public/people/' + person + '.html'
     // );
-    res.render('photoPage', { photoData: [1, 2, 3, 4, 5] });
+    // console.log("== peopleData[person]:", peopleData[person])
+    res.render('photoPage', {
+      name: peopleData[person].name,
+      photoData: peopleData[person].photos
+    });
   } else {
     next();
   }
